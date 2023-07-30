@@ -4,7 +4,6 @@ WORKDIR /
 
 RUN apt-get update && \
     apt-get install -y \
-      git \
       make \
       g++ \
       libasound2-dev \

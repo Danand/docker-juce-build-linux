@@ -13,14 +13,11 @@ VOLUME_PROJECT_ROOT="/project-root"
 VOLUME_OUTPUTS="/outputs"
 VOLUME_JUCE="/JUCE"
 
-git config --global --add safe.directory "${VOLUME_JUCE}"
+echo "Starting to build ${JUCER_PROJECT}"
+echo
 
-juce_rev_actual="$(cd "${VOLUME_JUCE}" && git rev-parse HEAD)"
-
-if [ "${juce_rev_actual}" != "${JUCE_REV_RECOMMENDED}" ]; then
-  echo "warning: Recommended revision of JUCE is ${JUCE_REV_RECOMMENDED}, but actual is ${juce_rev_actual}" 1>&2
-  echo 1>&2
-fi
+echo "Current recommended revision of JUCE is ${JUCE_REV_RECOMMENDED}"
+echo
 
 cd "${VOLUME_PROJECT_ROOT}"
 

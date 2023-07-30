@@ -36,7 +36,9 @@ project_root="my-project-dir"
 jucer_project="my-project.jucer"
 juce_repo="JUCE"
 outputs_dir="${project_root}/Builds/LinuxMakefile/build"
-cwd="."
+cwd="$(pwd)"
+
+mkdir -p "${outputs_dir}"
 
 docker run \
   --rm \
@@ -44,5 +46,5 @@ docker run \
   --mount "type=bind,source=${cwd}/${juce_repo},target=/JUCE" \
   --mount "type=bind,source=${cwd}/${outputs_dir},target=/outputs" \
   --env "JUCER_PROJECT=${jucer_project}" \
-  ghcr.io/danand/docker-juce-build-linux/juce-build-linux:0.1.0
+  ghcr.io/danand/docker-juce-build-linux/juce-build-linux:0.1.1
 ```
