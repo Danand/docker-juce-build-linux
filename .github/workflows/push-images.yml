@@ -1,0 +1,50 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+env:
+  PRODUCT_NAME: juce-build-linux
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Login ghcr.io
+      shell: bash
+      run: |
+        docker login \
+        --username ${{ github.repository_owner }} \
+        --password ${{ secrets._GITHUB_PAT }} \
+        ghcr.io
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Get Docker image tag for ghcr.io
+      id: docker-image-tag
+      uses: Danand/docker-image-tag@v2-rc.8
+      with:
+        product-name: ${{ env.PRODUCT_NAME }}
+
+    - name: Build image
+      shell: bash
+      run: |
+        docker build \
+          --file=./Dockerfile \
+          --tag=${{ steps.docker-image-tag.outputs.image-tag }} \
+          --progress="plain" \
+          .
+
+    - name: Assign additional tags
+      shell: bash
+      run: |
+        docker tag ${{ steps.docker-image-tag.outputs.image-tag }} ${{ steps.docker-image-tag.outputs.prefix }}:latest
+
+    - name: Push image
+      shell: bash
+      run: |
+        docker push ${{ steps.docker-image-tag.outputs.image-tag }}
