@@ -42,6 +42,7 @@ mkdir -p "${outputs_dir}"
 
 docker run \
   --rm \
+  --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=${cwd}/${project_root},target=/project-root" \
   --mount "type=bind,source=${cwd}/${juce_repo},target=/JUCE" \
   --mount "type=bind,source=${cwd}/${outputs_dir},target=/outputs" \
