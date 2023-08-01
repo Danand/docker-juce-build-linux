@@ -39,7 +39,7 @@ pushd "./Builds/LinuxMakefile"
 
 make VST3
 
-ls -R "${VOLUME_OUTPUTS}"
+ls -R .
 
 echo "Build completed succefully"
 echo

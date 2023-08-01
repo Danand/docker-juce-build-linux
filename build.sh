@@ -30,16 +30,8 @@ cwd="$4"
 
 docker run \
   --rm \
+  --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=${cwd}/${project_root},target=/project-root" \
   --mount "type=bind,source=${cwd}/${juce_repo},target=/JUCE" \
   --env "JUCER_PROJECT=${jucer_project}" \
-  juce-build:latest
-
-elevation="$(test $(id -u) != 0 && echo -n sudo || echo -n)"
-
-if [ ! -z "${elevation}" ]; then
-  echo "Now you may be prompted for sudo password to restore ownership of output directory..." 1>&2
-  echo 1>&2
-fi
-
-"${elevation}" chown -R $USER:$USER "${outputs_dir}"
+  juce-build-linux:latest
