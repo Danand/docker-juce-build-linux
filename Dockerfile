@@ -23,10 +23,10 @@ RUN apt-get update && \
       libglu1-mesa-dev \
       mesa-common-dev
 
-COPY ./build-image.sh .
+COPY ./entrypoint.sh .
 
-RUN chmod +x ./build-image.sh
+RUN chmod +x ./entrypoint.sh
 
 ENV JUCE_REV_RECOMMENDED "69795dc8e589a9eb5df251b6dd994859bf7b3fab"
 
-ENTRYPOINT [ "./build-image.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]

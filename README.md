@@ -15,9 +15,9 @@ git clone git@github.com:Danand/docker-juce-build-linux.git
 
 cd docker-juce-build-linux
 
-chmod +x ./build-vst3.sh
+chmod +x ./build.sh
 
-./build-vst3.sh \
+./build.sh \
   "relative-to-current-dir/my-project-dir" \
   "relative-to-my-project-dir/my-project.jucer" \
   "relative-to-current-dir/JUCE" \
