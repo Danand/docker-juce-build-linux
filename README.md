@@ -45,7 +45,6 @@ docker run \
   --user "$(id -u):$(id -g)" \
   --mount "type=bind,source=${cwd}/${project_root},target=/project-root" \
   --mount "type=bind,source=${cwd}/${juce_repo},target=/JUCE" \
-  --mount "type=bind,source=${cwd}/${outputs_dir},target=/outputs" \
   --env "JUCER_PROJECT=${jucer_project}" \
   ghcr.io/danand/docker-juce-build-linux/juce-build-linux:0.1.1
 ```

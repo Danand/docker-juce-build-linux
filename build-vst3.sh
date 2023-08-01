@@ -28,15 +28,10 @@ jucer_project="$2"
 juce_repo="$3"
 cwd="$4"
 
-outputs_dir="${project_root}/Builds/LinuxMakefile/build"
-
-mkdir -p "${outputs_dir}"
-
 docker run \
   --rm \
   --mount "type=bind,source=${cwd}/${project_root},target=/project-root" \
   --mount "type=bind,source=${cwd}/${juce_repo},target=/JUCE" \
-  --mount "type=bind,source=${cwd}/${outputs_dir},target=/outputs" \
   --env "JUCER_PROJECT=${jucer_project}" \
   juce-build:latest
 
